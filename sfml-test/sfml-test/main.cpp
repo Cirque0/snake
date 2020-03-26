@@ -22,8 +22,13 @@ void startGame()
     dir = 0;
     s[0].x = 16; // iwasan mo rin mga magic numbers katulad neto... saan mo nakuha ung 16? panget yan dapat magic numbers tawag dyan.. 
     s[0].y = 16;
-    f.x = rand() % 32;
-    f.y = rand() % 32;
+    
+    for(int i = 0; i < 4; i++)
+    {
+        s[i].x = (i + 1) * 16;
+        s[i].y = (i + 1) * 16;
+    }
+ 
 }   
 
 int main()
