@@ -5,23 +5,26 @@
 using namespace std;
 using namespace sf;
 
-int size = 16;
-int num = 4, dir = 0;
+/* bad idea ang global variables lalo na kung hindi const, so iwasan mo to. yung windows_size(size) pwede magremain as global variable since constant naman sya pero lagyan mong keyword na const*/
+int block_Size = 16;
+int num = 4, dir = 0; // eto need mo irefactor di maganda to, okay lang in this case since isa lang naman file mo pero ngayon pa lang iwasan mo na kase ung project natin di lang yun one file.
 
+/* mas maganda pag hiwalayin mo ng struct/class ung snake at food. Then since may pagkakapareho sila which is pareho silang may x and y (pos), mas maganda kung gamitan mo ng inheritance. Since nasa c++ ka and mag OOP ka, class na gamitin mo instead of struct*/
 struct snake
 {
     int x, y;
 } s[100], f;
 
+
 void startGame()
 {
     num = 4;
     dir = 0;
-    s[0].x = 16;
+    s[0].x = 16; // iwasan mo rin mga magic numbers katulad neto... saan mo nakuha ung 16? panget yan dapat magic numbers tawag dyan.. 
     s[0].y = 16;
     f.x = rand() % 32;
     f.y = rand() % 32;
-}
+}   
 
 int main()
 {
@@ -29,7 +32,7 @@ int main()
 
     startGame();
 
-    RenderWindow win(VideoMode (32*size, 32*size), "Snake", Style::Close | Style::Titlebar);
+    RenderWindow win(VideoMode (32* block_Size, 32* block_Size), "Snake", Style::Close | Style::Titlebar); // Instead na cinocompute mo yung size ng window, dapat cinocompute mo na lang ung size ng block base sa size ng window.. ung size ng window mas maganda kung constant yan
     Texture texture1, texture2;
 
     texture1.loadFromFile("sprites/green.png");
@@ -126,11 +129,11 @@ int main()
 
         for(int i = 0; i < num; i++)
         {
-            sSprite.setPosition(s[i].x*size, s[i].y*size);
+            sSprite.setPosition(s[i].x* block_Size, s[i].y* block_Size);
             win.draw(sSprite);
         }
 
-        fSprite.setPosition(f.x*size, f.y*size);
+        fSprite.setPosition(f.x* block_Size, f.y* block_Size);
         win.draw(fSprite);
 
         win.display();
