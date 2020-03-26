@@ -17,8 +17,13 @@ void startGame()
 {
     num = 4;
     dir = 0;
-    s[0].x = 16;
-    s[0].y = 16;
+    
+    for(int i = 0; i < 4; i++)
+    {
+        s[i].x = (i + 1) * 16;
+        s[i].y = (i + 1) * 16;
+    }
+    
     f.x = rand() % 32;
     f.y = rand() % 32;
 }
